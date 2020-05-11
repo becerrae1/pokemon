@@ -20,6 +20,7 @@ class Pokemon:
         self.moves = moves
         self.attack = EVs['ATTACK']
         self.defense = EVs['DEFENSE']
+        self.health = health
         self.bars = 20 # of health bars
 
     def fight(self, Pokemon2):
@@ -67,16 +68,16 @@ class Pokemon:
                     string_2_attack = "Its not very effective"
 
         # Actual fighting now
-        while(self.bars > 0) and (Pokemon2.bar > 0):
+        while(self.bars > 0) and (Pokemon2.bars > 0):
             #print health of each pokemon
             print(f"{self.name}\t\tHLTH\t{self.health}")
             print(f"{Pokemon2.name}\t\tHLTH\t{Pokemon2.health}\n")
 
             print(f"Go {self.name}!")
             for i, x in enumerate(self.moves):
-                print(f"{x+1},", x)
+                print(f"{i+1}.", x)
             index = int(input('Pick a move: '))
-            delay_print(f"{self.name} used {moves[index-1]}!")
+            delay_print(f"{self.name} used {self.moves[index-1]}!")
             time.sleep(1)
             delay_print(string_1_attack)
 
@@ -102,9 +103,9 @@ class Pokemon:
 
             print(f"Go {Pokemon2.name}!")
             for i, x in enumerate(Pokemon2.moves):
-                print(f"{x+1},", x)
+                print(f"{i+1},", x)
             index = int(input('Pick a move: '))
-            delay_print(f"{Pokemon2.name} used {moves[index-1]}!")
+            delay_print(f"{Pokemon2.name} used {Pokemon2.moves[index-1]}!")
             time.sleep(1)
             delay_print(string_2_attack)
 
@@ -126,11 +127,16 @@ class Pokemon:
                 delay_print("\n....." + self.name + ' fainted.')
                 break
 
+        money = np.random.choice(5000)
+        delay_print(f"Opponent paid you ${money}.")
+
 
 
 
 if __name__ == '__main__':
-    pass
+    #Create Pokemon
+    Charizard = Pokemon('Charizard', 'Fire', ['Flamethrower', 'Fly', 'Blast Burn', 'Fire Punch'], {'ATTACK': 12, 'DEFENSE': 8})
+    Blastoise = Pokemon('Blastoise', 'Water', ['Water Gun', 'Bubblebeam', 'Hydro Pump', 'Surf'], {'ATTACK' : 10, 'DEFENSE': 10})
 
 
-
+Charizard.fight(Blastoise)
