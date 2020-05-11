@@ -82,9 +82,50 @@ class Pokemon:
 
             #Determine Damage
             Pokemon2.bars -= self.attack
-            Pokemon.health = ""
+            Pokemon2.health = ""
 
-            
+            #Add back bars plus defense boost
+            for j in range(int(Pokemon2.bars+.1*Pokemon2.defense)):
+                Pokemon2.health += "="
+
+            time.sleep(1)
+            print(f"{self.name}\t\tHLTH\t{self.health}")
+            print(f"{Pokemon2.name}\t\tHLTH\t{Pokemon2.health}\n")
+            time.sleep(.5)
+
+            #Check to see if pokemon is fainted
+            if Pokemon2.bars <= 0:
+                delay_print("\n....." + Pokemon2.name + ' fainted.')
+                break
+
+            #Pokemon 2's turn
+
+            print(f"Go {Pokemon2.name}!")
+            for i, x in enumerate(Pokemon2.moves):
+                print(f"{x+1},", x)
+            index = int(input('Pick a move: '))
+            delay_print(f"{Pokemon2.name} used {moves[index-1]}!")
+            time.sleep(1)
+            delay_print(string_2_attack)
+
+            #Determine Damage
+            self.bars -= Pokemon2.attack
+            self.health = ""
+
+            #Add back bars plus defense boost
+            for j in range(int(self.bars+.1*self.defense)):
+                self.health += "="
+
+            time.sleep(1)
+            print(f"{self.name}\t\tHLTH\t{self.health}")
+            print(f"{Pokemon2.name}\t\tHLTH\t{Pokemon2.health}\n")
+            time.sleep(.5)
+
+            #Check to see if pokemon is fainted
+            if self.bars <= 0:
+                delay_print("\n....." + self.name + ' fainted.')
+                break
+
 
 
 
